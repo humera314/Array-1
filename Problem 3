@@ -1,0 +1,45 @@
+class Solution:
+    #TC: O(n*m)
+    #SC:O(1)
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        '''
+        approach:take 4 variable top, left, right and bottom
+        and move left-top,right; bittom=right,bottom,right-bottom,left, top-bottom,top
+        and continie till left<=right anf top<=bottom
+        '''
+        if matrix is None or len(matrix)==0:
+            return []
+        m= len(matrix)
+        n=len(matrix[0])
+        res=[]
+        top=0
+        left=0
+        right=n-1
+        bottom=m-1
+        while top<=bottom and left<=right:
+            #left yo right
+            for i in range(top,right+1):
+                res.append(matrix[top][i])
+            top+=1
+
+            #move top to bottom
+
+            for j in range(top,bottom+1):
+                res.append(matrix[j][right])
+            right-=1
+           
+            if top<=bottom: 
+                #move right to left
+                for k in range(right,left-1,-1):
+                    res.append(matrix[bottom][k])
+                bottom-=1
+            #bottom to top
+            if left<=right:
+                for l in range(bottom,top-1,-1):
+                    res.append(matrix[l][left])
+                left+=1
+        return res
+
+
+
+        
