@@ -1,0 +1,46 @@
+class Solution:
+    #TC: O(m*n)
+    #SC: O(1) they ask us to return int array we gave int array
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        '''
+        create a new array and move in 2 direction 
+        check for boundry condition and increment row and col accordingly
+        '''
+        if mat is None or len(mat)==0:
+            return mat
+
+        m= len(mat)
+        n=len(mat[0])
+        rsu=[0] *(m*n)
+        index=0 #val at patricular
+        dir=1 #give dir btm to top
+        row=0
+        col=0
+        while(index< m*n):
+            rsu[index]=mat[row][col]
+            index+=1
+            if dir==1:
+                if col==n-1:
+                    dir=-1
+                    row+=1
+                elif row==0:
+                    dir=-1
+                    col+=1
+
+                else:
+                    row-=1
+                    col+=1
+            else:
+                if row==m-1:
+                    dir=1
+                    col+=1
+                elif col==0:
+                    dir=1
+                    row+=1
+
+                else:
+                    row+=1
+                    col-=1
+        return rsu
+
+        
